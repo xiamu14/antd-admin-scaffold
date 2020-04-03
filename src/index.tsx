@@ -1,14 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ConfigProvider } from "antd";
+import { ChiliReqContext } from "chili-request";
+import zhCN from "antd/es/locale-provider/zh_CN";
+import { baseConfig } from "./apis/config";
+import Login from "./pages/login/index";
+import App from "./pages/app/index";
+
+import "./style/index.scss";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ChiliReqContext.Provider value={baseConfig}>
+    <ConfigProvider locale={zhCN}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route path="/" component={App} />
+          </Switch>
+        </BrowserRouter>
+      </React.StrictMode>
+    </ConfigProvider>
+  </ChiliReqContext.Provider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

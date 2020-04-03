@@ -1,0 +1,42 @@
+/*
+ * @Description:
+ * @Type:
+ * @Author: Ben
+ * @LastEditors: Ben
+ * @Date: 2019-04-30 15:06:59
+ * @LastEditTime: 2019-04-30 15:34:55
+ */
+ .login--box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f0f2f5;
+}
+
+.login_warp {
+  width: 400px;
+  .logo_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    > img.logo {
+      height: 30px;
+      margin-right: 10px;
+    }
+    > h2 {
+      margin-bottom: 0;
+      color: #2458ff;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .antd-pro-layouts-user-layout-container {
+      background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+      background-repeat: no-repeat;
+      background-position: center 110px;
+      background-size: 100%;
+  }
+}
