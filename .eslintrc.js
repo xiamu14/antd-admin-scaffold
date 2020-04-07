@@ -6,6 +6,7 @@ module.exports = {
     "no-console": 0,
     camelcase: 2,
     "react/destructuring-assignment": 1,
+    "react/jsx-props-no-spreading": 0,
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/ban-ts-ignore": "off",

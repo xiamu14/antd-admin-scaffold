@@ -14,14 +14,12 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <ChiliReqContext.Provider value={baseConfig}>
     <ConfigProvider locale={zhCN}>
-      <React.StrictMode>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route path="/" component={App} />
-          </Switch>
-        </BrowserRouter>
-      </React.StrictMode>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route path="/" component={App} />
+        </Switch>
+      </BrowserRouter>
     </ConfigProvider>
   </ChiliReqContext.Provider>,
   document.getElementById("root")

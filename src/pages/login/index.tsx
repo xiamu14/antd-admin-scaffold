@@ -7,13 +7,32 @@
  * @LastEditTime: 2019-04-30 21:38:56
  */
 
-import React, { useState, useCallback } from "react";
-import { Alert, notification } from "antd";
+import React, { useCallback, useState } from "react";
+import { Tabs, Form, Input, Button, Layout } from "antd";
 import { RouteComponentProps } from "react-router-dom";
 import { useChiliReq } from "chili-request";
-import { login } from "../../util/login";
+import {
+  UserOutlined,
+  LockOutlined,
+  CopyrightOutlined,
+} from "@ant-design/icons";
 
+import { login } from "../../util/login";
+import LogoSvg from "../../image/logo.svg";
+
+import "./index.module.scss";
 import "./index.scss";
+
+const { TabPane } = Tabs;
+const { Footer } = Layout;
+
+const layout = {
+  labelCol: { span: 0 },
+  wrapperCol: { span: 24 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 0, span: 24 },
+};
 
 enum Type {
   tab1 = "1",
@@ -28,38 +47,11 @@ interface State {
 }
 
 export default function CustomLogin(props: RouteComponentProps) {
-  const [notice, setNotice] = useState("");
   const fetch = useCallback(useChiliReq(), []);
   const [type] = useState(Type.tab1);
   // @ts-ignore
-  const onSubmit = (err, values) => {
-    if (!values) {
-      return setNotice("请输入用户名和密码！");
-    }
-    if (!values.username) {
-      return setNotice("请输入用户名");
-    }
-    if (!values.password) {
-      return setNotice("请输入密码!");
-    }
-    /**
-     * @description 调用接口获取登录凭证
-     * @example chili("login", {
-      username: values.username,
-      password: values.password
-    })
-      .then(res => {
-        loginUtil.saveUserInfo({
-          nickname: values.username,
-          accessToken: res.accessToken
-        });
-        const { history } = this.props;
-        history.push(getPathByName(routes.home));
-      })
-      .catch(error => {
-        console.log("可能出现了网络错误", error);
-      });
-     */
+  const handleFinish = values => {
+    console.log("这是登录信息", values);
 
     // fetch()<LoginRes>(
     //   loginApi({
@@ -82,18 +74,61 @@ export default function CustomLogin(props: RouteComponentProps) {
     //     history.push("/");
     //   }
     // });
-
-    return true;
+    const { history } = props;
+    history.push("/");
   };
 
   return (
-    <div className="login--box antd-pro-layouts-user-layout-container">
-      <div className="login_warp">
-        <div className="logo_box">
-          {/* <img src={logo} alt="logo" className="logo" /> */}
-          <h2>xxx后台</h2>
+    <Layout styleName="login--box antd-login-container">
+      <div styleName="login--wrap">
+        <div styleName="login_warp">
+          <div styleName="logo_box">
+            <img src={LogoSvg} alt="logo" styleName="logo" />
+            <h2 styleName="title">Ant Design Admin</h2>
+          </div>
+          <Tabs defaultActiveKey={type}>
+            <TabPane tab="帐号密码登录" key={Type.tab1}>
+              <Form
+                {...layout}
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={handleFinish}
+                // onFinishFailed={handleFinishFailed}
+              >
+                <Form.Item
+                  label=""
+                  name="username"
+                  rules={[{ required: true, message: "请输入用户名！" }]}
+                >
+                  <Input size="large" prefix={<UserOutlined />} />
+                </Form.Item>
+
+                <Form.Item
+                  label=""
+                  name="password"
+                  rules={[{ required: true, message: "请输入密码！" }]}
+                >
+                  <Input.Password size="large" prefix={<LockOutlined />} />
+                </Form.Item>
+
+                <Form.Item {...tailLayout}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    styleName="btn-submit"
+                  >
+                    登录
+                  </Button>
+                </Form.Item>
+              </Form>
+            </TabPane>
+          </Tabs>
         </div>
       </div>
-    </div>
+      <Footer>
+        Copyright <CopyrightOutlined />
+        2020 有途前端体验技术部
+      </Footer>
+    </Layout>
   );
 }
