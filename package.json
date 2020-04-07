@@ -59,5 +59,9 @@
     "react-app-rewired": "^2.1.5",
     "sass": "^1.26.3",
     "source-map-explorer": "^2.4.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:xiamu14/antd-admin-scaffold.git",
+  "author": "ben14 <544652471@qq.com>",
+  "license": "MIT"
 }
